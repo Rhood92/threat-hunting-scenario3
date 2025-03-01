@@ -44,10 +44,15 @@ DeviceProcessEvents
 - **A PowerShell script (`exfiltratedata.ps1`) was executed with `ExecutionPolicy Bypass`**, indicating **an attempt to override security policies.**
 - **7-Zip was installed (`7z2408-x64.exe`) and executed**, likely to **compress company files**.
 - The presence of **PowerShell execution suggests automation**, meaning John may have **scripted the process**.
+  
 ![image](https://github.com/user-attachments/assets/a5997439-62f4-4404-848a-92cfb89ffb5b)
+
 ![image](https://github.com/user-attachments/assets/cd95dd06-c3e2-4dcf-9078-eb8a3c8bb421)
+
 ![image](https://github.com/user-attachments/assets/2c1d71dc-7a76-4708-876d-2315ba20b655)
+
 ![image](https://github.com/user-attachments/assets/09977912-9f27-45e2-b695-afffcf8ee7f5)
+
 ![image](https://github.com/user-attachments/assets/fbacf967-9c1b-4c3b-b00c-c199a9c06f26)
 
 ### 📝 Query 3: Checking for Network Exfiltration
