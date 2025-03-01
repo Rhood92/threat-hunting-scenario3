@@ -28,20 +28,9 @@ DeviceFileEvents
 🧐 **Findings:**
 - A **compressed file** named `employee-data-20250301183817.zip` was found **in the backup folder** (`C:\ProgramData\backup`).
 - This suggests **data was archived for potential exfiltration.**
+![image](https://github.com/user-attachments/assets/62205244-201d-47ae-bf73-9cfd59177bf2)
 
-### 📝 Query 2: Identify Processes Related to Compression
-```kql
-let archive_applications = dynamic(["winrar.exe", "7z.exe", "winzip32.exe", "peazip.exe", "Bandizip.exe", "UniExtract.exe"]);
-DeviceProcessEvents
-| where FileName has_any(archive_applications)
-| order by Timestamp desc
-| where DeviceName == "rich-mde-test"
-```
-🧐 **Findings:**
-- **7-Zip (`7z.exe`) was executed multiple times**, suggesting **manual or scripted file compression.**
-- The process was triggered **shortly before the ZIP file appeared.**
-
-### 📝 Query 3: Timeline Analysis of Compression and Execution
+### 📝 Query 2: Timeline Analysis of Compression and Execution
 ```kql
 let specificTime = datetime(2025-03-01T18:38:26.3235392Z);
 let VMName = "rich-mde-test";
@@ -55,8 +44,13 @@ DeviceProcessEvents
 - **A PowerShell script (`exfiltratedata.ps1`) was executed with `ExecutionPolicy Bypass`**, indicating **an attempt to override security policies.**
 - **7-Zip was installed (`7z2408-x64.exe`) and executed**, likely to **compress company files**.
 - The presence of **PowerShell execution suggests automation**, meaning John may have **scripted the process**.
+![image](https://github.com/user-attachments/assets/a5997439-62f4-4404-848a-92cfb89ffb5b)
+![image](https://github.com/user-attachments/assets/cd95dd06-c3e2-4dcf-9078-eb8a3c8bb421)
+![image](https://github.com/user-attachments/assets/2c1d71dc-7a76-4708-876d-2315ba20b655)
+![image](https://github.com/user-attachments/assets/09977912-9f27-45e2-b695-afffcf8ee7f5)
+![image](https://github.com/user-attachments/assets/fbacf967-9c1b-4c3b-b00c-c199a9c06f26)
 
-### 📝 Query 4: Checking for Network Exfiltration
+### 📝 Query 3: Checking for Network Exfiltration
 ```kql
 let specificTime = datetime(2025-03-01T18:38:26.3235392Z);
 let VMName = "rich-mde-test";
@@ -127,8 +121,3 @@ DeviceNetworkEvents
 ✅ **Preventative measures recommended: PowerShell restrictions, DLP enforcement, and app control.**  
 
 🔐 **Next Steps:** **Monitor John's device**, **implement tighter controls**, and **investigate potential offline exfiltration methods.**  
-
----
-
-### 📌 **Repository Information**
-💡 This project is designed for **educational & security research purposes**. If you're interested in **threat hunting**, **data exfiltration detection**, or **PowerShell security**, feel free to explore and contribute! 🚀
